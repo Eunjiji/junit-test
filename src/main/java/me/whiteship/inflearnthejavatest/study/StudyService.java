@@ -23,6 +23,12 @@ public class StudyService {
     public Study createNewStudy(Long memberId, Study study){
         Optional<Member> member = memberService.findById(memberId);
         study.setOwner(member.orElseThrow(() -> new IllegalArgumentException("member don't find")));
-        return repository.save(study);
+
+        Study newStudy = repository.save(study);
+
+        // memberService 한테 새로운 스터디가 나왔다고 알려주는 메서드
+        memberService.notify(newStudy);
+        memberService.notify(member.get());
+        return newStudy;
     }
 }
