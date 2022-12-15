@@ -40,15 +40,13 @@ public class Study {
         this.name = name;
     }
 
-    public StudyStatus getStatus() {
-        return this.status;
-    }
-
-    public int getLimit() {
-        return limit;
-    }
 
     public void setOwner(Member member) {
         this.owner = member;
+    }
+
+    public void open() {
+        this.status = StudyStatus.OPENDED;
+        this.openedDateTime = LocalDateTime.now();
     }
 }
